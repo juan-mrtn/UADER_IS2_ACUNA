@@ -22,6 +22,11 @@ def factorial(num):
 
 if len(sys.argv) == 1:
    num = int(input("Debe informar un número: "))
+elif "-" in sys.argv[1]:  # Si el argumento es un rango
+   start, end = map(int, sys.argv[1].split('-'))
+   for i in range(start, end + 1):
+       print(f"Factorial de {i} es {factorial(i)}")
+   sys.exit()
 else:
    num = int(sys.argv[1])
 
