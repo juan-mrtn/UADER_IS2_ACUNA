@@ -20,16 +20,27 @@ def factorial(num):
             num -= 1
         return fact 
 
+
 if len(sys.argv) == 1:
+   # Si no se pasa ningún argumento, solicitamos un número
    num = int(input("Debe informar un número: "))
 elif "-" in sys.argv[1]:  # Si el argumento es un rango
-   start, end = map(int, sys.argv[1].split('-'))
-   for i in range(start, end + 1):
-       print(f"Factorial de {i} es {factorial(i)}")
+   arg = sys.argv[1].split('-')
+   if len(arg) == 2:  # Rango con ambos límites
+       if arg[0] == '':  # Si el límite inferior está vacío, lo ponemos en 1
+           start = 1
+       else:
+           start = int(arg[0])
+
+       if arg[1] == '':  # Si el límite superior está vacío, lo ponemos en 60
+           end = 60
+       else:
+           end = int(arg[1])
+
+       for i in range(start, end + 1):
+           print(f"Factorial de {i} es {factorial(i)}")
    sys.exit()
 else:
    num = int(sys.argv[1])
 
-num=int(sys.argv[1])
-print("Factorial ",num,"! es ", factorial(num)) 
-
+print("Factorial ", num, "! es ", factorial(num))
