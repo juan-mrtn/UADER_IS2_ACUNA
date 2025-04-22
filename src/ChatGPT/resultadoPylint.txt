@@ -1,0 +1,40 @@
+✔️ 5. Análisis con pylint
+
+Puntuación obtenida: **7.44/10**
+
+Durante el análisis estático con `pylint`, se detectaron varias advertencias, tanto por estilo como por posibles problemas funcionales. A continuación, se detallan las principales correcciones realizadas y las decisiones justificadas:
+
+Correcciones aplicadas:
+- Se agregó un docstring al módulo.
+- Se reorganizó el orden de los imports según el estándar (standard → third-party → local).
+- Se eliminó el espacio en blanco innecesario al final de la línea 46.
+- Se agregó un parámetro `timeout=10` en la llamada a `requests.post`.
+- Se renombró la constante `last_query` a `LAST_QUERY`.
+
+Advertencias que se decidieron **no corregir** (con justificación):
+
+- **Uso de `global`**: Se mantiene el uso de `global` en una variable simple para evitar pasar múltiples parámetros entre funciones. Dada la baja complejidad del script (52 líneas), no genera riesgo de errores ocultos.
+
+- **Captura genérica de `Exception`**: Se optó por mantener la captura general para asegurar la robustez ante cualquier error inesperado en la interacción con la API local, dado que puede fallar por múltiples razones (red, encoding, etc.). En un entorno más crítico, se debería especificar los tipos de excepción.
+
+- **Nombre del archivo y variables**: El nombre `usandoAPI.py` se mantuvo por claridad con la consigna. En una aplicación más grande se seguiría estrictamente el estilo `snake_case`.
+
+---
+
+Con estas correcciones y justificaciones, se considera que el código mantiene una buena calidad general, y las decisiones de estilo fueron hechas de forma razonada para priorizar legibilidad, simplicidad y cumplimiento de la consigna.
+
+
+************* Module usandoAPI
+usandoAPI.py:46:0: C0303: Trailing whitespace (trailing-whitespace)
+usandoAPI.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+usandoAPI.py:1:0: C0103: Module name "usandoAPI" doesn't conform to snake_case naming style (invalid-name)
+usandoAPI.py:5:0: C0103: Constant name "last_query" doesn't conform to UPPER_CASE naming style (invalid-name)
+usandoAPI.py:34:11: W0718: Catching too general exception Exception (broad-exception-caught)
+usandoAPI.py:12:19: W3101: Missing timeout argument for method 'requests.post' can cause your program to hang indefinitely (missing-timeout)
+usandoAPI.py:41:4: W0603: Using the global statement (global-statement)
+usandoAPI.py:58:19: W0718: Catching too general exception Exception (broad-exception-caught)
+usandoAPI.py:2:0: C0411: standard import "readline" should be placed before third party import "requests" (wrong-import-order)
+usandoAPI.py:3:0: C0411: standard import "json" should be placed before third party import "requests" (wrong-import-order)
+
+-----------------------------------
+Your code has been rated at 7.44/10
