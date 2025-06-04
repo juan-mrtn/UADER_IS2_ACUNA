@@ -1,0 +1,41 @@
+TP6 - Ingeniería Reversa, Refactoría y Reingeniería
+
+Se analizó el binario getJason.pyc mediante ingeniería inversa (con PyLingual), obteniendo el código fuente (NEW_getJason.py),
+el cual reveló que el programa solo recuperaba el valor de la clave 'token1' de un archivo JSON. La documentación exigía que debía
+acceder a cualquier clave (con 'token1' como default), funcionalidad que el código original no cumplía. Esto motivó la refactorización
+para añadir parámetros flexibles (--key), manejo de errores y validación de claves dinámicas, alineando el programa con los requisitos
+documentados.
+
+2a) El archivo binario getJason.pyc tiene como propósito leer un archivo JSON llamado sitedata.json y recuperar el valor asociado a una 
+clave específica. Según la documentación, el programa debería permitir al usuario especificar qué clave buscar como segundo argumento 
+por línea de comandos. En caso de no indicar ninguna clave, debía tomar por defecto "token1". Esto permitiría usar el programa de
+forma más general, reutilizando la lógica para cualquier par clave-valor en un archivo JSON similar.
+
+2b)	Se ejecutó el archivo decompilado (NEW_getJason.py) utilizando el archivo sitedata.json como entrada. Se comprobó que el programa leía
+correctamente dicho archivo y mostraba el valor de "token1". Sin embargo, al intentar indicar una segunda clave como argumento 
+adicional (por ejemplo "token2"), el programa no la utilizaba, sino que seguía accediendo únicamente a "token1". Esto indicaba una 
+discrepancia entre la documentación existente y el comportamiento real del programa, lo que justificaba la necesidad de realizar una 
+refactorización para corregir dicha limitación.
+
+2c)	El archivo getJason.pyc fue decompilado utilizando la herramienta PyLingual, obteniendo como resultado el archivo NEW_getJason.py. 
+
+2e)	La principal diferencia radicaba en que la documentación del sistema indicaba que debía ser posible especificar cualquier clave como
+argumento adicional. El código, sin embargo, estaba hardcodeado para siempre leer "token1", lo que limitaba su reusabilidad. Esta 
+diferencia implicaba que el programa debía ser refactorizado para cumplir con lo que se esperaba según la documentación oficial.
+
+Casos de Prueba:
+----------------
+- python getJason.py sitedata.json
+    → Imprime el valor de 'token1'
+
+- python getJason.py sitedata.json token2
+    → Imprime el valor de 'token2'
+
+- python getJason.py sitedata.json clave_inexistente
+    → Mensaje de error indicando clave no encontrada
+
+- python getJason.py archivo_asd.json
+    → Mensaje de error por archivo inexistente
+
+- python getJason.py
+    → Muestra el mensaje de ayuda sobre cómo usar el script

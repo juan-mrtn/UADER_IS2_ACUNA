@@ -1,0 +1,19 @@
+{
+    "bancos": {
+        "token1": {
+            "clave": "clave_banco_A",
+            "nombre": "Banco Nación",
+            "saldo_inicial": 1000.0
+        },
+        "token2": {
+            "clave": "clave_banco_B",
+            "nombre": "Banco Provincia",
+            "saldo_inicial": 2000.0
+        },
+        "token3": {
+            "clave": "clave_banco_C",
+            "nombre": "Banco Privado",
+            "saldo_inicial": 3000.0
+        }
+    }
+}
